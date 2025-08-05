@@ -69,7 +69,7 @@ export default function Header() {
 
   return (
     <>
-      <nav className="w-full h-auto bg-[#FFD7A8] flex justify-center sticky top-0 z-50 border-b-2 border-solid border-gray-800">
+      <nav className="w-full h-auto bg-[#FFD7A8] flex justify-center sticky top-0 z-[9999] border-b-2 border-solid border-gray-800">
         <div className="flex h-16 w-full max-w-[1440px] justify-between items-center px-4">
           {/* Logo */}
           <div className="flex items-center gap-2">
