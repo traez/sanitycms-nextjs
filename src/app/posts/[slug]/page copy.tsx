@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata} from "next"; // Added ResolvingMetadata
+import type { Metadata} from "next";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import {
@@ -10,22 +10,17 @@ import {
 } from "@portabletext/react";
 import Header2 from "@/components/Header2";
 import type { Post } from "@/lib/interface";
+//import { Post } from "@/sanity/types";
 
-// --- Params Interface for Page Component ---
-interface PageComponentProps {
+
+// --- Params Interface ---
+interface Params {
   params: {
     slug: string;
   };
   searchParams: {
     [key: string]: string | string[] | undefined;
   };
-}
-
-// --- Params Interface for generateMetadata function ---
-// This matches the type signature expected by Next.js for generateMetadata
-interface GenerateMetadataProps {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 type SanityImage = {
@@ -49,7 +44,8 @@ const richTextStyles = `
   prose-p:leading-7
   prose-li:list-disc
   prose-li:leading-7
-  prose-li:ml-4`;
+  prose-li:ml-4
+`;
 
 // --- Portable Text config ---
 const myPortableTextComponents: PortableTextComponents = {
@@ -86,11 +82,13 @@ async function getPost(slug: string): Promise<Post | null> {
 }
 
 // --- Dynamic Metadata ---
-export async function generateMetadata(
-  { params }: GenerateMetadataProps, // Use GenerateMetadataProps here
-): Promise<Metadata> {
-  const { slug } = await params; // Await params as it's a Promise
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  /*  const { params } = await props; 
+  const { slug } = await params;
+  const post = await getPost(slug); */
+  const { slug } = params; 
   const post = await getPost(slug);
+
   return {
     title: post?.title
       ? `${post.title} - Sanity CMS - Next.js`
@@ -100,10 +98,13 @@ export async function generateMetadata(
 }
 
 // --- Page Component ---
-const Postspage = async ({ params }: PageComponentProps) => {
-  // Use PageComponentProps here
-  const { slug } = params; // No await needed for params here
+const Postspage = async ({ params }: Params) => {
+  /*   const { params } = await props; 
+  const { slug } = await params;
+  const post = await getPost(slug); */
+  const { slug } = params;
   const post = await getPost(slug);
+
   if (!post) {
     return (
       <div className="text-center mt-20">
@@ -111,6 +112,7 @@ const Postspage = async ({ params }: PageComponentProps) => {
       </div>
     );
   }
+
   return (
     <div>
       <Header2 title={post.title} />
@@ -118,6 +120,7 @@ const Postspage = async ({ params }: PageComponentProps) => {
         <span className="text-purple-500">
           {new Date(post.publishedAt).toDateString()}
         </span>
+
         <div className="mt-5">
           {post.tags?.map((tag) => (
             <Link key={tag._id} href={`/tag/${tag.slug.current}`}>
@@ -127,6 +130,7 @@ const Postspage = async ({ params }: PageComponentProps) => {
             </Link>
           ))}
         </div>
+
         <div className={richTextStyles}>
           <PortableText
             value={post.body}
