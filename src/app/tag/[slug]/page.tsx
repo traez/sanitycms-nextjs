@@ -32,7 +32,7 @@ async function getPostsByTag(tag: string) {
 
 // Generate dynamic metadata based on tag slug
 export async function generateMetadata(props: Params): Promise<Metadata> {
-  const { slug } = await props.params;
+  const { slug } =  props.params;
 
   return {
     title: `Posts with the tag ${slug}`,

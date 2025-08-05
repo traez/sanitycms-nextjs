@@ -82,7 +82,7 @@ async function getPost(slug: string): Promise<Post | null> {
 
 // --- Dynamic Metadata ---
 export async function generateMetadata(props: Params): Promise<Metadata> {
-  const { slug } = props.params;
+  const { slug } =  props.params;
   const post = await getPost(slug);
 
   return {
