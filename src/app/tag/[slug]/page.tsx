@@ -35,20 +35,23 @@ export const revalidate = 60;
 
 // Generate dynamic metadata based on tag slug
 export async function generateMetadata(
-  { params }: Params,
+  props: Params,
   _parent: ResolvingMetadata
 ): Promise<Metadata> {
+  const { slug } = await props.params;
+
   return {
-    title: `Posts with the tag ${params.slug}`,
+    title: `Posts with the tag ${slug}`,
     description: "Created by Trae Zeeofor",
   };
 }
 
-const TagSlugpage = async ({ params }: Params) => {
-  const posts: Array<Post> = await getPostsByTag(params.slug);
+const TagSlugpage = async (props: Params) => {
+  const { slug } = await props.params;
+  const posts: Array<Post> = await getPostsByTag(slug);
   return (
     <div>
-      <Header2 title={`#${params.slug}`} tags />
+      <Header2 title={`#${slug}`} tags />
       <div>
         {posts.map((post) => (
           <PostComponent key={post._id} post={post} />
