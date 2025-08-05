@@ -1,7 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import Header2 from "@/components/Header2";
 import { Post } from "@/lib/interface";
-import PostComponent from "../components/PostComponent";
+import PostComponent from "@/components/PostComponent";
 
 async function getPosts() {
   const query = `
@@ -26,7 +26,7 @@ export const revalidate = 60; //tells the framework to revalidate the cached pag
 
 export default async function Home() {
   const posts: Post[] = await getPosts();
-  console.log(posts, "posts");
+  //console.log(posts, "posts");
 
   return (
     <div className="w-full min-h-[calc(100vh-103.3px)]">
