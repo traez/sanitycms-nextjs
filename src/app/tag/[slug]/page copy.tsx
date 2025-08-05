@@ -4,10 +4,10 @@ import { Post } from "@/lib/interface";
 import Header2 from "@/components/Header2";
 import PostComponent from "@/components/PostComponent";
 
-// --- Unified Props Interface ---
-interface PageProps {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+interface Params {
+  params: {
+    slug: string;
+  };
 }
 
 // GROQ query to fetch posts that reference a given tag by its slug
@@ -31,10 +31,10 @@ async function getPostsByTag(tag: string) {
 }
 
 // Generate dynamic metadata based on tag slug
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  const { slug } = await params; // Await params as it's a Promise
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+ /*  const { params } = await props;
+  const { slug } = await params; */
+  const { slug } = params; 
 
   return {
     title: `Posts with the tag ${slug}`,
@@ -42,10 +42,11 @@ export async function generateMetadata({
   };
 }
 
-const TagSlugpage = async ({ params }: PageProps) => {
-  const { slug } = await params; // Await params as it's a Promise
+const TagSlugpage = async ({ params }: Params) => {
+/*   const { params } = await props;
+  const { slug } = await params; */
+  const { slug } = params;
   const posts: Array<Post> = await getPostsByTag(slug);
-
   return (
     <div>
       <Header2 title={`#${slug}`} tags />

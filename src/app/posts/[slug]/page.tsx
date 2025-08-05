@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata} from "next"; // Added ResolvingMetadata
+import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import {
@@ -11,19 +11,8 @@ import {
 import Header2 from "@/components/Header2";
 import type { Post } from "@/lib/interface";
 
-// --- Params Interface for Page Component ---
-interface PageComponentProps {
-  params: {
-    slug: string;
-  };
-  searchParams: {
-    [key: string]: string | string[] | undefined;
-  };
-}
-
-// --- Params Interface for generateMetadata function ---
-// This matches the type signature expected by Next.js for generateMetadata
-interface GenerateMetadataProps {
+// --- Unified Props Interface for both Page Component and generateMetadata ---
+interface PageProps {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
@@ -86,9 +75,9 @@ async function getPost(slug: string): Promise<Post | null> {
 }
 
 // --- Dynamic Metadata ---
-export async function generateMetadata(
-  { params }: GenerateMetadataProps, // Use GenerateMetadataProps here
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params; // Await params as it's a Promise
   const post = await getPost(slug);
   return {
@@ -100,10 +89,10 @@ export async function generateMetadata(
 }
 
 // --- Page Component ---
-const Postspage = async ({ params }: PageComponentProps) => {
-  // Use PageComponentProps here
-  const { slug } = params; // No await needed for params here
+const Postspage = async ({ params }: PageProps) => {
+  const { slug } = await params; // Await params as it's a Promise
   const post = await getPost(slug);
+
   if (!post) {
     return (
       <div className="text-center mt-20">
@@ -111,6 +100,7 @@ const Postspage = async ({ params }: PageComponentProps) => {
       </div>
     );
   }
+
   return (
     <div>
       <Header2 title={post.title} />
