@@ -9,9 +9,6 @@ export const metadata: Metadata = {
   description: "Created by Trae Zeeofor",
 };
 
-// --- Revalidate every 60 seconds (ISR) ---
-export const revalidate = 60;
-
 // --- Fetch all tags with post count ---
 async function getAllTags(): Promise<Tag[]> {
   const query = `
@@ -22,7 +19,8 @@ async function getAllTags(): Promise<Tag[]> {
       "postCount": count(*[_type == "post" && references(^._id)])
     }
   `;
-  return client.fetch(query);
+  const options = { next: { revalidate: 60 } };
+  return client.fetch(query, {}, options);
 }
 
 const TagPage = async () => {

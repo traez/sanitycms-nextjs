@@ -1,11 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata} from "next";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
 import Header2 from "@/components/Header2";
 import { Post } from "@/lib/interface";
+//import { Post } from "@/sanity/types";
+import type {
+  PortableTextComponents,
+  PortableTextTypeComponentProps,
+} from "@portabletext/react";
 
 // --- Params Interface ---
 interface Params {
@@ -16,6 +21,15 @@ interface Params {
     [key: string]: string | string[] | undefined;
   };
 }
+
+type SanityImage = {
+  _type: "image";
+  asset: {
+    _type: "reference";
+    _ref: string;
+  };
+  alt?: string;
+};
 
 // --- Rich text styling ---
 const richTextStyles = `
@@ -33,10 +47,15 @@ const richTextStyles = `
 `;
 
 // --- Portable Text config ---
-const myPortableTextComponents = {
+const myPortableTextComponents: PortableTextComponents = {
   types: {
-    image: ({ value }: any) => (
-      <Image src={urlFor(value).url()} alt="Post" width={700} height={700} />
+    image: ({ value }: PortableTextTypeComponentProps<SanityImage>) => (
+      <Image
+        src={urlFor(value).url()}
+        alt={value.alt || "Post image"}
+        width={700}
+        height={700}
+      />
     ),
   },
 };
@@ -62,11 +81,8 @@ async function getPost(slug: string): Promise<Post | null> {
 }
 
 // --- Dynamic Metadata ---
-export async function generateMetadata(
-  props: Params,
-  _parent: ResolvingMetadata
-): Promise<Metadata> {
-  const { slug } = await props.params;
+export async function generateMetadata(props: Params): Promise<Metadata> {
+  const { slug } = props.params;
   const post = await getPost(slug);
 
   return {

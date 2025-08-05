@@ -3,7 +3,7 @@ export interface Post {
   slug: { current: string };
   publishedAt: string;
   excerpt: string;
-  body: any;
+  body: PostBody;
   tags: Array<Tag>;
   _id: string;
   headings?: Array<HTMLHeadElement | string>;
@@ -17,9 +17,34 @@ export interface Tag {
   postCount?: number;
 }
 
-export interface Comment {
-  name: string;
-  comment: string;
-  _createdAt: string;
-  _id: string;
-}
+
+export type PortableTextBlock = {
+  _key: string;
+  _type: "block";
+  children: Array<{
+    _key: string;
+    _type: "span";
+    text: string;
+    marks?: string[];
+  }>;
+  markDefs: Array<MarkDef>;
+  style: string; // e.g., 'normal', 'h1', 'blockquote', etc.
+};
+
+export type PortableTextImage = {
+  _key: string;
+  _type: "image";
+  alt?: string;
+  asset: {
+    _ref: string;
+    _type: "reference";
+  };
+};
+
+export type PostBody = Array<PortableTextBlock | PortableTextImage>;
+
+export type MarkDef = {
+  _key: string;
+  _type: "link";
+  href: string;
+};

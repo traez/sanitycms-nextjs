@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { Post } from "@/lib/interface";
 import Header2 from "@/components/Header2";
@@ -26,18 +26,12 @@ async function getPostsByTag(tag: string) {
       }
     }
   `;
-
-  return await client.fetch(query);
+  const options = { next: { revalidate: 60 } };
+  return client.fetch(query, {}, options);
 }
 
-// ISR: Revalidate page every 60 seconds
-export const revalidate = 60;
-
 // Generate dynamic metadata based on tag slug
-export async function generateMetadata(
-  props: Params,
-  _parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(props: Params): Promise<Metadata> {
   const { slug } = await props.params;
 
   return {
