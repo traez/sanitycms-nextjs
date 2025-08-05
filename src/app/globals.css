@@ -37,6 +37,8 @@ Defines global CSS variables. Tailwind and ShadCN use these for own base definit
 body {
   background-color: var(--background);
   color: var(--foreground);
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Tailwind’s Global Resets & Defaults */

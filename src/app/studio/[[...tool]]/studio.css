@@ -1,0 +1,5 @@
+/* Method 1: Target the main Sanity container (most specific) */
+#sanity[data-ui="NextStudioLayout"] {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}

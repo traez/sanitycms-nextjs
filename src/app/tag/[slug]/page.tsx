@@ -47,13 +47,15 @@ const TagSlugpage = async ({ params }: PageProps) => {
   const posts: Array<Post> = await getPostsByTag(slug);
 
   return (
-    <div>
-      <Header2 title={`#${slug}`} tags />
-      <div>
-        {posts.map((post) => (
-          <PostComponent key={post._id} post={post} />
-        ))}
-      </div>
+    <div className="w-full ">
+      <section className="w-full max-w-[1440px] mx-auto h-auto">
+        <Header2 title={`#${slug}`} tags />
+        <div>
+          {posts.map((post) => (
+            <PostComponent key={post._id} post={post} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
