@@ -13,7 +13,8 @@ interface PageProps {
 // GROQ query to fetch posts that reference a given tag by its slug
 async function getPostsByTag(tag: string) {
   const query = `
-    *[_type == "post" && references(*[_type == "tag" && slug.current == "${tag}"]._id)]{
+    *[_type == "post" && references(*[_type == "tag" && slug.current == "${tag}"]._id)]
+    | order(publishedAt desc) {
       _id,
       title,
       slug,
