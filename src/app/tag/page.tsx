@@ -28,7 +28,10 @@ const TagPage = async () => {
   return (
     <div className="w-full min-h-[calc(100vh-103.3px)] bg-gray-50 dark:bg-gray-900">
       <section className="w-full max-w-[1440px] mx-auto h-auto px-4 py-8">
-        <Heading title="Tags" />
+        <Heading
+          title="Tags"
+          text="Find articles that match your interests. Click on a tag to get started."
+        />
         <div className="mt-12">
           {tags.length > 0 ? (
             <div className="grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-8">

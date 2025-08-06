@@ -54,7 +54,7 @@ const TagSlugpage = async ({ params }: PageProps) => {
   return (
     <div className="w-full min-h-[calc(100vh-103.3px)] bg-gray-50 dark:bg-gray-900">
       <section className="w-full max-w-[1440px] mx-auto h-auto px-4 py-8">
-        <Heading title={`#${slug}`} tags />
+        <Heading title={`Articles with the name tag: #${slug}`} tags />
         <div className="mt-12">
           {posts?.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">

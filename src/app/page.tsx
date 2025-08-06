@@ -32,7 +32,11 @@ export default async function Home() {
   return (
     <div className="w-full min-h-[calc(100vh-103.3px)] bg-gray-50 dark:bg-gray-900">
       <section className="w-full max-w-[1440px] mx-auto h-auto px-4 py-8">
-        <Heading title="Articles" tags />
+        <Heading
+          title="Latest Amatcol Articles; Stay Informed. Stay Empowered."
+          text="Our blog shares insights, tips, and news around solar power, safety systems, and smart living."
+          tags
+        />
         {/* Posts Grid */}
         <div className="mt-12">
           {posts?.length > 0 ? (
