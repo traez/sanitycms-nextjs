@@ -6,6 +6,13 @@ export interface Post {
   body: PostBody;
   tags: Array<Tag>;
   _id: string;
+  mainImage?: {
+    asset: {
+      _type: "reference";
+      _ref: string;
+    };
+    alt?: string;
+  };
   headings?: Array<HTMLHeadElement | string>;
   comments?: Array<Comment>;
 }
@@ -17,7 +24,6 @@ export interface Tag {
   postCount?: number;
 }
 
-
 export type PortableTextBlock = {
   _key: string;
   _type: "block";
@@ -28,7 +34,7 @@ export type PortableTextBlock = {
     marks?: string[];
   }>;
   markDefs: Array<MarkDef>;
-  style: string; // e.g., 'normal', 'h1', 'blockquote', etc.
+  style: string; 
 };
 
 export type PortableTextImage = {
