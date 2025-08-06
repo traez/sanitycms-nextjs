@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { Tag } from "@/lib/interface";
-import Header2 from "@/components/Header2";
+import Heading from "@/components/Heading";
 
 export const metadata: Metadata = {
   title: "Tags - Sanity CMS - Next.js",
@@ -29,7 +29,7 @@ const TagPage = async () => {
   return (
     <div className="w-full ">
       <section className="w-full max-w-[1440px] mx-auto h-auto">
-        <Header2 title="Tags" />
+        <Heading title="Tags" />
 
         <div className="mt-6 space-y-2">
           {tags.length > 0 ? (

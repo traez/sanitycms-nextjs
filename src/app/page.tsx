@@ -1,5 +1,5 @@
 import { client } from "@/sanity/lib/client";
-import Header2 from "@/components/Header2";
+import Heading from "@/components/Heading";
 import { Post } from "@/lib/interface";
 import PostComponent from "@/components/PostComponent";
 
@@ -28,7 +28,7 @@ export default async function Home() {
   return (
     <div className="w-full min-h-[calc(100vh-103.3px)]">
       <section className="w-full max-w-[1440px] mx-auto h-auto">
-        <Header2 title="Articles" tags />
+        <Heading title="Articles" tags />
         <div>
           {posts?.length > 0 &&
             posts?.map((post) => <PostComponent key={post?._id} post={post} />)}

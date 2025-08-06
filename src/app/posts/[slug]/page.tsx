@@ -8,7 +8,7 @@ import {
   type PortableTextComponents,
   type PortableTextTypeComponentProps,
 } from "@portabletext/react";
-import Header2 from "@/components/Header2";
+import Heading from "@/components/Heading";
 import type { Post } from "@/lib/interface";
 
 // --- Unified Props Interface for both Page Component and generateMetadata ---
@@ -104,7 +104,7 @@ const Postspage = async ({ params }: PageProps) => {
   return (
     <div className="w-full ">
       <section className="w-full max-w-[1440px] mx-auto h-auto">
-        <Header2 title={post.title} />
+        <Heading title={post.title} />
         <div className="text-center">
           <span className="text-purple-500">
             {new Date(post.publishedAt).toDateString()}

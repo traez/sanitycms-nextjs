@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { Post } from "@/lib/interface";
-import Header2 from "@/components/Header2";
+import Heading from "@/components/Heading";
 import PostComponent from "@/components/PostComponent";
 
 // --- Unified Props Interface ---
@@ -49,7 +49,7 @@ const TagSlugpage = async ({ params }: PageProps) => {
   return (
     <div className="w-full ">
       <section className="w-full max-w-[1440px] mx-auto h-auto">
-        <Header2 title={`#${slug}`} tags />
+        <Heading title={`#${slug}`} tags />
         <div>
           {posts.map((post) => (
             <PostComponent key={post._id} post={post} />
