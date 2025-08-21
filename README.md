@@ -1,6 +1,6 @@
-# Shadcn UI Component Library SandBox
+# Sanity CMS Sandbox
 
-React UI component libraries sandbox App.
+Sanity CMS Sandbox App.
 
 ## Table of contents
 
@@ -20,19 +20,9 @@ React UI component libraries sandbox App.
 
 ### The Challenge/User Stories
 
-**Damilare Femi Akinlaja**: "When working on large projects, where you collaborate with many other engineers, a well componentized architecture makes it so that you don’t redo what already exists.
+The aim of this project was for me to build and deploy a modern blog using Next.js 14, TypeScript, Tailwind CSS, and Sanity CMS. I wanted to go beyond a basic blog by setting up the project from scratch, integrating a headless CMS, and giving it a clean, responsive design. A big part of the challenge was implementing tags so posts could be organized, filtered, and counted in a meaningful way.
 
-Problem caused from redoing stuff is regression errors, and inconsistency in app behavior:
-
-For example, there is a modal component that has been maintained over time to be perfect fit for the project’s scenarios.
-
-Then someone else create their own version in their own small feature… there will be chances of design inconsistency, behavior differences, and it could confuse other developers when maintaining the code base.
-
-Imperative development is nice, but some architecture makes it maintainable and testable.
-
-Tailwind only solve for design, but not all of it, and it doesn’t solve for scoped logic.
-
-Frontend architectures like component driven design were not born out of someone’s fantasy, they solve problems that you would never know existed until you encounter them and it’s too late"
+By the end, I had a production-ready blog with dynamic pages, reusable layouts, theme switching, a custom 404 page, and deployment on Vercel—while also learning how to properly integrate CMS-driven content into a Next.js application.
 
 ### Screenshot
 
@@ -40,8 +30,8 @@ Frontend architectures like component driven design were not born out of someone
 
 ### Links
 
-- Solution URL: [https://github.com/traez/shadcn-ui-component-library](https://github.com/traez/shadcn-ui-component-library)
-- Live Site URL: [https://shadcn-ui-component-library.vercel.app/](https://shadcn-ui-component-library.vercel.app/)
+- Solution URL: [https://github.com/traez/sanitycms-nextjs](https://github.com/traez/sanitycms-nextjs)
+- Live Site URL: [https://sanitycms-nextjs.vercel.app/](https://sanitycms-nextjs.vercel.app/)
 
 ## My process
 
@@ -57,71 +47,104 @@ Frontend architectures like component driven design were not born out of someone
 - Nodejs
 - Tailwind CSS
 - nextjs-toploader
-- ShadCN  
-- @radix-ui  
-- class-variance-authority  
-- clsx  
-- lucide-react  
-- nextjs-toploader  
-- tailwind-merge    
+- Sanity – Headless CMS
+- next-sanity – Sanity integration for Next.js
+- @sanity/image-url – Helper for building Sanity image URLs
+- @sanity/vision – GROQ query explorer for Sanity
+- @portabletext/react – Portable Text renderer for React
+- react-icons – Popular icon library for React
+- styled-components – CSS-in-JS styling library
 
 ### What I learned
 
-**1 Main Reasons for Using CSS Component Libraries**   
+**1 Tutorial Overview**  
+**Excellent Tutorial with Great Handholding**
 
-**A Accessibility**: Built-in ARIA attributes and keyboard navigation support  
-**B Consistency**: Ensures uniform design across the application  
-**C Speed**: Reduces development time with pre-built components  
-**D Responsive Design**: Components automatically adapt to different screen sizes  
-**E Cross-Browser Compatibility**: Works seamlessly across various browsers       
+Build and Deploy BLOG with Tags - Next.js 14, Sanity CMS and Tailwind
+- **Video Tutorial**: [YouTube - CodewalkEmpire](https://www.youtube.com/watch?v=yAqgjSZ0PqY&ab_channel=CodewalkEmpire) (2:31:34)
+- **GitHub Repository**: [stefandjikic/next-cms-blog](https://github.com/stefandjikic/next-cms-blog)
+- **Live Demo**: [next-cms-blog-ce.vercel.app](https://next-cms-blog-ce.vercel.app/)
+- **Published**: Dec 6, 2023 by Codewalk Empire
 
-**2 Shadcn/ui Current State & Considerations**  
-Shadcn/ui, built on top of Radix, faces potential risks due to Radix's declining maintenance—currently maintained by just one part-time developer, with unresolved bugs and limited support from its parent company, which reportedly wants to discontinue it. Despite Shadcn's popularity, it's built on an unstable foundation. Some developers are advocating for a shift toward more stable alternatives like Ariakit or Base UI, which are actively maintained and well-funded. Without a stronger foundation, Shadcn's long-term viability remains uncertain. However, we continue using it as it's currently in a class of its own.
+**2 Initial Setup Process**  
+For existing Next.js apps, run `pnpm create sanity@latest`
 
-**Important**: Shadcn is not used everywhere in this project. Tailwind CSS is still extensively used, with Shadcn components imported only as needed. This approach helps maintain familiarity with the library while keeping the codebase more maintainable and consistent.
+During the interactive setup:
+- **Project name?** → Pick any name (e.g., Amatcol Studio)
+- **Use TypeScript?** → Yes ✅
+- **Output path?** → e.g., studio (this creates a /studio folder inside your project)
+- **Dataset name?** → production
+- **Use a project template?** → Clean project with no predefined schemas or Blog
 
-**3 Understanding Transitive Dependencies**  
-**What Are Transitive Dependencies?**
-- Dependencies that your direct dependencies (listed in `package.json`) rely on
-- Installed automatically by npm/yarn/pnpm but not explicitly listed in your `package.json`
-- Form a dependency tree (viewable with `npm ls`, `yarn list`, or `pnpm list --depth 2`) 
+*Note: I embedded and chose blank template*  
 
-**4 VS Code File Path Tips**  
-In VS Code, you can quickly generate file paths as comments using the built-in "Copy Path" feature:
-1. Right-click the file in the Explorer sidebar
-2. Select "Copy Path" or "Copy Relative Path"
-3. Paste it as a comment in your file  
-```javascript
-// src/components/Navbar.tsx
+**3 Sanity Platform Features**  
+**Growth Plan Trial**: 30-day free trial available
+- Documentation: [Sanity Growth Plan Trial](https://www.sanity.io/docs/platform-management/growth-plan-trial)
+
+**Authentication Options**: 
+- GitHub
+- Google  
+- Email/Password 
+
+**4 Schema Definition**  
+Define your schema and register the post schema type to the Studio schema for content structure.     
+
+**5 GROQ Query Language**  
+**GROQ (Graph-Relational Object Queries)** is Sanity's custom query language designed to retrieve and shape structured content from its document-based database. 
+
+- **Similar to**: GraphQL (a universal typed API query language created by Facebook/Meta for querying APIs with strongly-typed schemas)
+- **Example Query**: `*[_type == "post"]` - Gets all documents of type "post"
+- **Testing Environment**: Use `/studio/vision` to test queries before embedding in code  
+
+**6 Portable Text Rendering**  
+**Installation**: `pnpm add @portabletext/react`
+
+Sanity stores rich text (like blog posts) in a special JSON format called Portable Text, not plain HTML. To render that content properly in a React app, you need `@portabletext/react`, which converts Portable Text into real React components like `<p>`, `<h2>`, etc. Without it, you'd just see raw structured data instead of readable content.   
+
+**7 Typography Styling**  
+**Installation**: `pnpm add -D @tailwindcss/typography`
+
+Add the plugin to your main `style.css` file (this also ensures you enjoy IntelliSense in VS Code):
+
+\`\`\`css
+@import "tailwindcss";
++ @plugin "@tailwindcss/typography";
+\`\`\`
+
+The Tailwind CSS Typography plugin gives you a `prose` class that automatically styles rich text content like blog posts or articles, so you don't have to manually style each HTML element. It ensures clean, readable formatting for headings, paragraphs, lists, and code blocks, making it perfect for CMS-driven content.  
+
+**8 Image Handling**  
+**Installation**: `pnpm add @sanity/image-url`
+
+Sanity stores images as references, not direct links. You need the `urlForImage()` helper with `@sanity/image-url` to generate real image URLs from those references so you can display them properly in your frontend.
+
+After installation, add the function to `src/sanity/lib/image.ts`.
+
+**Common Issue**: You may encounter this error: `next/image`, hostname "cdn.sanity.io" is not configured under images in your `next.config.js`. Make sure to configure this in your Next.js config.  
+
+**9 Documentation Resources**  
+- **Official Guide**: [Sanity Next.js Quickstart](https://www.sanity.io/docs/next-js-quickstart) - Use as your primary coding guide
+
+**10 Studio Access**  
+- **Studio URL**: [sanitycms-nextjs.vercel.app/studio](https://sanitycms-nextjs.vercel.app/studio)
+- **Project Management**: [Sanity Project Members](https://www.sanity.io/manage/project/sufhe0gb)
+
+Both links are protected - first by the app, second by Sanity authentication. 
+
+**11 Dependencies Summary**  
+```js
+"dependencies": {
+  "@portabletext/react": "^3.2.1",     // Install manually
+  "@sanity/image-url": "^1.1.0",       // Installed with setup command
+  "@sanity/vision": "^4.2.0",          // Installed with setup command
+  "next-sanity": "^10.0.6",            // Installed with setup command
+  "sanity": "^4.2.0"                   // Installed with setup command
+},
+"devDependencies": {
+  "@tailwindcss/typography": "^0.5.16" // Install manually
+}
 ```
-
-**5 State Management Strategy. When to Use Cookies vs. Zustand:**  
-**Use cookies** for small, persistent values that need to be shared between server and client (auth tokens, user preferences, "remember me" toggles)
-**Use Zustand** (or similar) for fast-changing, in-memory app state that doesn't need to persist across page reloads or be accessed server-side 
-
-**6 Understanding the `asChild`Property**  
-The `asChild` prop is a common pattern in component libraries (like Radix UI) that allows a component to pass all its props down to its child element instead of rendering its own DOM element.
-
-**Example:**
-
-```javascriptreact
-<SidebarMenuButton asChild>
-  <Link href="/dashboard">
-    <Home />
-    <span>Dashboard</span>
-  </Link>
-</SidebarMenuButton>
-```
-**Renders as:**
-
-```html
-<a href="/dashboard" class="sidebar-menu-button"> <!-- Notice it's now an <a> tag -->
-  <svg>...</svg> <!-- Home icon -->
-  <span>Dashboard</span>
-</a>
-```
-
-The button properties are passed down to the `<Link>` component rather than creating a separate button wrapper.   
 
 ### Continued development
 
@@ -136,9 +159,9 @@ ChatGPT
 
 ## Author
 
-- Website - [Zeeofor Technologies](https://zeeofortech.vercel.app/)
+- Website - [Zeeofor Technologies](https://zeeofor.tech)
 - Twitter - [@trae_z](https://twitter.com/trae_z)
 
 ## Acknowledgments
 
--Jehovah that keeps breath in my lungs
+- Jehovah who keeps breath in my lungs

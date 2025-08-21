@@ -103,7 +103,7 @@ const Postspage = async ({ params }: PageProps) => {
 
   return (
     <div className="w-full ">
-      <section className="w-full max-w-[1440px] mx-auto h-auto">
+      <section className="w-full max-w-[1440px] mx-auto h-auto px-4 py-8">
         <Heading title={post.title} text={post?.excerpt} />
         <div className="text-center">
           <span className="text-purple-500">
